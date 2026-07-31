@@ -5,6 +5,10 @@ Colorado for over 50 years. Watercolors, portraits, and recent mixed media colla
 
 **Live site: <https://gailwager.github.io/art/>**
 
+> **One-time setup:** the repository owner must enable GitHub Pages once —
+> repo **Settings → Pages → Source: Deploy from a branch → `main` / `(root)` → Save**.
+> The site goes live at the URL above a minute or two later.
+
 ## Sections
 
 - **Home** — parallax banner and interactive tiles for each collection
