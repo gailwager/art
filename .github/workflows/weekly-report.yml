@@ -1,0 +1,37 @@
+name: Weekly analytics report
+
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh analytics summary from GoatCounter
+        env:
+          GC_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+          GC_CODE: gailwager
+        run: |
+          if [ -z "$GC_TOKEN" ]; then
+            echo "GOATCOUNTER_TOKEN secret not set — skipping refresh."
+            exit 0
+          fi
+          mkdir -p data
+          # Total pageviews and per-path (artwork event) counts, last 90 days
+          curl -sf -H "Authorization: Bearer $GC_TOKEN" \
+            "https://$GC_CODE.goatcounter.com/api/v0/stats/hits?limit=100" \
+            -o data/analytics-summary.json || exit 0
+          if ! git diff --quiet data/analytics-summary.json 2>/dev/null; then
+            git config user.name "analytics-bot"
+            git config user.email "actions@github.com"
+            git add data/analytics-summary.json
+            git commit -m "Weekly analytics summary refresh"
+            git push
+          fi

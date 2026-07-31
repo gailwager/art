@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Gail Wager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+
+<main class="page">
+  <div class="page-head" id="page-head"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="close" aria-label="Close">&times;</button>
+  <button class="prev" aria-label="Previous">&#8249;</button>
+  <button class="next" aria-label="Next">&#8250;</button>
+  <img src="" alt="">
+  <div class="cap">
+    <div class="t"></div>
+    <div class="c"></div>
+    <div class="n"></div>
+    <button class="lb-star" type="button">&#9734; Save to favorites</button>
+  </div>
+</div>
+
+<script src="data/catalog.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>

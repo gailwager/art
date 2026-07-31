@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gail Wager — Colorado Artist</title>
+<meta name="description" content="Watercolors and mixed media by Gail Wager, an artist painting in the mountains of Colorado for over 50 years.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+
+<header class="hero" id="hero">
+  <div class="hero-img" id="hero-img" style="background-image:url('images/autumn%20in%20evergreen%20(3).jpg')"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-title" id="hero-title">
+    <h1>Gail Wager</h1>
+    <p>Watercolors &amp; mixed media from the Colorado mountains</p>
+  </div>
+  <div class="scroll-hint">&#8595;</div>
+</header>
+
+<main class="sheet">
+  <section class="tiles-wrap">
+    <h2>The Collections</h2>
+    <p class="lede">Fifty years of painting &mdash; wildlife, portraits, flowers and the landscapes of
+    the American West. Choose a collection to begin.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+</main>
+
+<script src="data/catalog.js"></script>
+<script src="js/main.js"></script>
+<script>
+/* representative image per category tile */
+const TILE_ART = {
+  "collage": "mm_DThRBt_DWTd.jpg",
+  "wildlife": "FOX2001.JPG",
+  "birds": "wood ducks new camera.jpg",
+  "horses": "winter stampede.jpg",
+  "dogs-cats": "Cheryls dogs.jpg",
+  "people": "Riders in the snow.jpg",
+  "flowers": "columbine 3.JPG",
+  "landscapes": "tree reflections.jpg",
+  "southwest": "pueblo in snow.jpg",
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  buildNav("home");
+
+  const tiles = document.getElementById("tiles");
+  tiles.innerHTML = CATALOG.categories.map(c => {
+    const n = CATALOG.artworks.filter(a => a.cat === c.key).length;
+    const img = TILE_ART[c.key] || CATALOG.artworks.find(a => a.cat === c.key).file;
+    const thumb = img.replace(/\.[^.]+$/, ".jpg");
+    return `<a class="tile" href="gallery.html?cat=${c.key}">
+      <img loading="lazy" src="images/thumbs/${encodeURIComponent(thumb)}" alt="${c.name}">
+      <span class="count-chip">${n} works</span>
+      <span class="tile-label"><h3>${c.name}</h3><span>${c.tag}</span></span>
+    </a>`;
+  }).join("");
+
+  /* parallax: background rises slowly, title scrolls off later */
+  const img = document.getElementById("hero-img");
+  const title = document.getElementById("hero-title");
+  const onScroll = () => {
+    const y = window.scrollY;
+    img.style.transform = `translateY(${y * 0.4}px)`;
+    title.style.transform = `translateY(${y * 0.72}px)`;
+    title.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.9));
+  };
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Gail Wager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+
+<main class="page">
+  <article class="prose">
+    <h1>Contact the Artist</h1>
+    <p style="text-align:center;color:var(--ink-soft)">Questions, commissions, or interest in a
+    painting &mdash; Gail would love to hear from you.</p>
+
+    <form class="contact" id="contact-form" method="POST">
+      <input type="hidden" name="_subject" value="Artwork inquiry from gailwager.github.io">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none">
+
+      <label for="f-name">Name</label>
+      <input id="f-name" name="name" type="text" required autocomplete="name">
+
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" required autocomplete="email">
+
+      <label for="f-notes">Notes</label>
+      <textarea id="f-notes" name="message" rows="7"
+        placeholder="Tell Gail what you are interested in — a painting's title or code, a commission, or a question."></textarea>
+      <div class="fav-hint" id="fav-hint"></div>
+
+      <div class="submit-row">
+        <button class="btn gold" type="submit">Send Message</button>
+      </div>
+      <p id="form-status" style="text-align:center;margin-top:1rem;color:var(--accent)"></p>
+    </form>
+  </article>
+</main>
+
+<script src="data/catalog.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  buildNav("contact");
+
+  // The destination address is assembled at runtime so it does not appear
+  // in the page source or get harvested by simple scrapers.
+  const dest = atob("Z2FpbHdhZ2VyQGNvbWNhc3QubmV0");
+  const form = document.getElementById("contact-form");
+  form.action = "https://formsubmit.co/" + dest;
+
+  // Auto-populate notes with starred artwork
+  const favs = getFavorites();
+  if (favs.length) {
+    const lines = favs.map(code => {
+      const w = CATALOG.artworks.find(a => a.code === code);
+      return w ? `${w.code} — ${w.title}` : code;
+    });
+    const ta = document.getElementById("f-notes");
+    ta.value = "I'm interested in the following artwork:\n" + lines.join("\n") + "\n\n";
+    document.getElementById("fav-hint").textContent =
+      "Your " + favs.length + " starred artwork" + (favs.length > 1 ? "s were" : " was") + " added automatically. Feel free to edit.";
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Report — Gail Wager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<style>
+  table.report { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; font-size: .92rem; }
+  table.report th, table.report td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--line); }
+  table.report th { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-soft); }
+  .muted { color: var(--ink-soft); font-size: .88rem; }
+</style>
+</head>
+<body>
+
+<main class="page">
+  <article class="prose">
+    <h1>Site Analytics</h1>
+    <p class="muted" id="report-scope"></p>
+    <div id="report"></div>
+    <h2 style="font-size:1.3rem;margin:1.5rem 0 .5rem">About this report</h2>
+    <p class="muted">Visits, pageviews and artwork interest (views and stars) are recorded
+    anonymously. Numbers shown here come from this browser's own history of the site.
+    To collect site-wide totals with visitor regions, connect a free
+    <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> account
+    by setting <code>GOATCOUNTER_CODE</code> in <code>js/main.js</code> — its dashboard then
+    provides worldwide visit counts by country, and this weekly report can be refreshed
+    from its export. See the repository README for details.</p>
+  </article>
+</main>
+
+<script src="data/catalog.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  buildNav("");
+  const s = loadStats();
+  const scope = document.getElementById("report-scope");
+  scope.textContent = "Local report generated " + new Date().toLocaleDateString() +
+    " — tracking since " + new Date(s.first).toLocaleDateString() + " on this device.";
+
+  const byCount = (obj) => Object.entries(obj).sort((a, b) => b[1] - a[1]);
+  const nameOf = (code) => {
+    const w = CATALOG.artworks.find(a => a.code === code);
+    return w ? `${code} — ${w.title}` : code;
+  };
+  const table = (title, rows, cols) => rows.length
+    ? `<h2 style="font-size:1.3rem;margin-top:1.5rem">${title}</h2>
+       <table class="report"><tr><th>${cols[0]}</th><th>${cols[1]}</th></tr>` +
+      rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("") + "</table>"
+    : "";
+
+  document.getElementById("report").innerHTML =
+    `<table class="report"><tr><th>Metric</th><th>Value</th></tr>
+      <tr><td>Total pageviews (this device)</td><td>${s.visits}</td></tr>
+      <tr><td>Artworks starred</td><td>${Object.keys(s.stars).length}</td></tr>
+      <tr><td>Artworks viewed full-size</td><td>${Object.keys(s.views).length}</td></tr>
+     </table>` +
+    table("Most viewed artwork", byCount(s.views).slice(0, 15).map(([k, v]) => [nameOf(k), v]), ["Artwork", "Views"]) +
+    table("Most starred artwork", byCount(s.stars).slice(0, 15).map(([k, v]) => [nameOf(k), v]), ["Artwork", "Stars"]) +
+    table("Pageviews by page", byCount(s.pages), ["Page", "Views"]);
+});
+</script>
+</body>
+</html>
