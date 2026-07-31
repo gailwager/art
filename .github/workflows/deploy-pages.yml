@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
+# NOTE: GitHub Pages must first be enabled once by the repository owner
+# (Settings -> Pages -> Deploy from a branch -> main / root). After that this
+# workflow is not needed; it exists only for the "GitHub Actions" source option.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
