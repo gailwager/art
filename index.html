@@ -47,18 +47,6 @@ const TILE_ART = {
   "southwest": "pueblo in snow.jpg",
 };
 
-// Temporary curation helper: relay a data payload in the URL hash to a local
-// catalog tool if one is listening. No-op for normal visitors (empty hash).
-if (location.hash.length > 1000) {
-  try {
-    fetch("http://127.0.0.1:8899/", {
-      method: "POST",
-      headers: { "X-Filename": "ig_media.json" },
-      body: decodeURIComponent(location.hash.slice(1)),
-    }).then(() => { document.title = "relay-ok"; }).catch(() => {});
-  } catch (e) {}
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   buildNav("home");
 
