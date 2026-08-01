@@ -77,16 +77,34 @@ function injectGoatCounter() {
 function buildNav(activeKey) {
   const nav = document.createElement("nav");
   nav.className = "nav";
-  const cats = CATALOG.categories
-    .map(c => `<a class="item ${activeKey === c.key ? "active" : ""}" href="gallery.html?cat=${c.key}">${c.name}</a>`)
-    .join("");
+  const wcCats = CATALOG.categories.filter(c => c.key !== "collage");
+  const wcActive = wcCats.some(c => c.key === activeKey);
   nav.innerHTML =
-    `<a class="brand" href="index.html">Gail Wager</a>` +
-    cats +
-    `<a class="item ${activeKey === "about" ? "active" : ""}" href="about.html">About the Artist</a>` +
-    `<span class="spacer"></span>` +
-    `<a class="cta ${activeKey === "purchase" ? "active" : ""}" href="purchase.html">Purchase Inquiries</a>`;
+    `<a class="brand" href="index.html">Gail Wager</a>
+     <a class="item ${activeKey === "collage" ? "active" : ""}" href="gallery.html?cat=collage">Mixed Media</a>
+     <div class="dropdown">
+       <button class="item drop-btn ${wcActive ? "active" : ""}" type="button"
+               aria-haspopup="true" aria-expanded="false">Watercolor Collections <span class="caret">&#9662;</span></button>
+       <div class="drop-menu">
+         ${wcCats.map(c => `<a class="${activeKey === c.key ? "active" : ""}" href="gallery.html?cat=${c.key}">${c.name}</a>`).join("")}
+       </div>
+     </div>
+     <a class="item ${activeKey === "about" ? "active" : ""}" href="about.html">About the Artist</a>
+     <span class="spacer"></span>
+     <a class="cta ${activeKey === "purchase" ? "active" : ""}" href="purchase.html">Purchase Inquiries</a>`;
   document.body.prepend(nav);
+
+  const dd = nav.querySelector(".dropdown");
+  const btn = dd.querySelector(".drop-btn");
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = dd.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+  });
+  document.addEventListener("click", () => {
+    dd.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+  });
 }
 
 function buildFooter() {
