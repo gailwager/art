@@ -36,14 +36,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: .02em;
   z-index: 100;
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  flex-wrap: wrap;
+  gap: .6rem 1.2rem;
   padding: .65rem 1.4rem;
   background: rgba(251, 250, 247, .92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
 }
 .nav .brand {
   font-family: var(--serif);
@@ -52,7 +50,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: .02em;
   color: var(--ink);
   margin-right: .4rem;
 }
-.nav a.item {
+.nav .item {
   font-size: .78rem;
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -60,9 +58,47 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: .02em;
   padding: .2rem 0;
   border-bottom: 1px solid transparent;
 }
-.nav a.item:hover, .nav a.item.active { color: var(--ink); border-bottom-color: var(--gold); }
+.nav .item:hover, .nav .item.active { color: var(--ink); border-bottom-color: var(--gold); }
 .nav .spacer { flex: 1; }
-.nav a.cta { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); }
+.nav a.cta { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--accent); white-space: nowrap; }
+
+/* dropdown */
+.nav .dropdown { position: relative; }
+.nav .drop-btn {
+  font-family: var(--sans);
+  font-weight: 300;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nav .drop-btn .caret { font-size: .9em; }
+.nav .drop-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + .55rem);
+  left: -0.6rem;
+  flex-direction: column;
+  min-width: 230px;
+  background: rgba(251, 250, 247, .98);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  padding: .45rem 0;
+  z-index: 200;
+}
+.nav .dropdown.open .drop-menu { display: flex; }
+@media (hover: hover) and (pointer: fine) {
+  .nav .dropdown:hover .drop-menu { display: flex; }
+}
+.nav .drop-menu a {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--ink-soft);
+  padding: .5rem 1.1rem;
+}
+.nav .drop-menu a:hover, .nav .drop-menu a.active { color: var(--ink); background: rgba(201,162,39,.08); }
 
 /* ---------- Parallax hero (homepage) ---------- */
 .hero {
@@ -84,6 +120,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: .02em;
 .hero .hero-title {
   position: absolute;
   inset: 0;
+  transform: translateY(56px);
   display: flex;
   flex-direction: column;
   align-items: center;

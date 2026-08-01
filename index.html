@@ -65,10 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /* parallax: background rises slowly, title scrolls off later */
   const img = document.getElementById("hero-img");
   const title = document.getElementById("hero-title");
+  const TITLE_OFFSET = 56; // rest the title over the mountains, not the sky
   const onScroll = () => {
     const y = window.scrollY;
     img.style.transform = `translateY(${y * 0.4}px)`;
-    title.style.transform = `translateY(${y * 0.72}px)`;
+    title.style.transform = `translateY(${TITLE_OFFSET + y * 0.72}px)`;
     title.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.9));
   };
   addEventListener("scroll", onScroll, { passive: true });
