@@ -8,6 +8,12 @@ const CATALOG = {
    "tag": "Recent abstract and collage explorations"
   },
   {
+   "key": "oil",
+   "letter": "O",
+   "name": "Oil Paintings",
+   "tag": "New work in oils \u2014 bears, barns and Colorado light"
+  },
+  {
    "key": "wildlife",
    "letter": "W",
    "name": "Wildlife",
@@ -830,6 +836,213 @@ const CATALOG = {
    "note": "\u201cWinter\u2019s Edge\u201d Acrylic Mixed media Small works 11\u201dx13\u201d I have loved living in cold places: Jackson Hole, Wyoming and the mountain town of Evergreen, Colorado . Even Connecticut\u2026",
    "w": 1440,
    "h": 1920
+  },
+  {
+   "code": "O-01",
+   "title": "Autumn on Squaw Pass",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0223.jpeg",
+   "note": "Golden aspens against the September sky. Oil, 17\u2033 \u00d7 15\u2033.",
+   "w": 640,
+   "h": 530
+  },
+  {
+   "code": "O-02",
+   "title": "Beautiful Day on the Colorado Plains",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0224.jpeg",
+   "note": "A weathered grain elevator under big clouds. Oil, 12\u2033 \u00d7 15\u2033.",
+   "w": 640,
+   "h": 536
+  },
+  {
+   "code": "O-03",
+   "title": "Black Lab",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0218.jpeg",
+   "note": "Black lab portrait. Oil, 12\u2033 \u00d7 15\u2033.",
+   "w": 530,
+   "h": 640
+  },
+  {
+   "code": "O-04",
+   "title": "Bluebird",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0217.jpeg",
+   "note": "A bluebird perched on barbed wire. Oil, 12\u2033 \u00d7 15\u2033.",
+   "w": 528,
+   "h": 640
+  },
+  {
+   "code": "O-05",
+   "title": "Buffalo",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0225.jpeg",
+   "note": "A bull bison in winter grass. Oil, 17\u2033 \u00d7 15\u2033.",
+   "w": 640,
+   "h": 498
+  },
+  {
+   "code": "O-06",
+   "title": "Cabin 1000",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0237.jpeg",
+   "note": "Old cabins in the dry hills. Oil study.",
+   "w": 492,
+   "h": 640
+  },
+  {
+   "code": "O-07",
+   "title": "Early Morning Frolic",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0209.jpeg",
+   "note": "Two paint horses at play in the morning light. Oil, 24\u2033 \u00d7 20\u2033.",
+   "w": 640,
+   "h": 514
+  },
+  {
+   "code": "O-08",
+   "title": "Early Spring",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0238.jpeg",
+   "note": "A bare tree beside the path, waiting for the season to turn. Oil study.",
+   "w": 470,
+   "h": 640
+  },
+  {
+   "code": "O-09",
+   "title": "Evergreen Lake",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0221.jpeg",
+   "note": "Quiet water and willows at Evergreen Lake, Colorado. Oil, 17\u2033 \u00d7 15\u2033.",
+   "w": 640,
+   "h": 480
+  },
+  {
+   "code": "O-10",
+   "title": "Five Island Lobster",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0214.jpeg",
+   "note": "The lobster shack at Five Islands, Maine. Oil, 16\u2033 \u00d7 13\u2033.",
+   "w": 640,
+   "h": 558
+  },
+  {
+   "code": "O-11",
+   "title": "High Country Barn",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0235.jpeg",
+   "note": "A red barn at the edge of the pines, aspens alongside. Oil study.",
+   "w": 472,
+   "h": 640
+  },
+  {
+   "code": "O-12",
+   "title": "Late Winter Barn",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0236.jpeg",
+   "note": "Snow lingering on the roof, bare aspens behind. Oil study.",
+   "w": 640,
+   "h": 492
+  },
+  {
+   "code": "O-13",
+   "title": "Mama Bear",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0213.jpeg",
+   "note": "Black bear portrait. Oil, 25\u2033 \u00d7 25\u2033.",
+   "w": 624,
+   "h": 640
+  },
+  {
+   "code": "O-14",
+   "title": "Mr. Fox",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0222.jpeg",
+   "note": "Red fox portrait. Oil, 17\u2033 \u00d7 15\u2033.",
+   "w": 640,
+   "h": 480
+  },
+  {
+   "code": "O-15",
+   "title": "Niko",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0215.jpeg",
+   "note": "Bernese mountain dog puppy portrait. Oil, 11\u2033 \u00d7 14\u2033.",
+   "w": 510,
+   "h": 640
+  },
+  {
+   "code": "O-16",
+   "title": "Old Mine in Nevadaville",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0220.jpeg",
+   "note": "The old mine buildings at Nevadaville, Colorado. Oil, 17\u2033 \u00d7 14\u2033.",
+   "w": 640,
+   "h": 526
+  },
+  {
+   "code": "O-17",
+   "title": "Peaceful Afternoon in Evergreen",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0216.jpeg",
+   "note": "A red barn in the green hills. Oil, 15\u2033 \u00d7 12\u2033.",
+   "w": 640,
+   "h": 542
+  },
+  {
+   "code": "O-18",
+   "title": "Red Barn in the Foothills",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0230.jpeg",
+   "note": "Horses at the fence below the mountains. Oil study.",
+   "w": 640,
+   "h": 484
+  },
+  {
+   "code": "O-19",
+   "title": "Snowmelt in Spring",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0212.jpeg",
+   "note": "A creek finding its way through the last of the snow. Oil, 14\u2033 \u00d7 11\u2033.",
+   "w": 536,
+   "h": 640
+  },
+  {
+   "code": "O-20",
+   "title": "Sunrise on Snowbird Lane",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0219.jpeg",
+   "note": "Winter sunrise over the valley. Oil, 17\u2033 \u00d7 14\u2033.",
+   "w": 640,
+   "h": 540
+  },
+  {
+   "code": "O-21",
+   "title": "The CP Barn",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0231.jpeg",
+   "note": "An old barn wearing its painted brand. Oil study.",
+   "w": 476,
+   "h": 640
+  },
+  {
+   "code": "O-22",
+   "title": "The Chestnut",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0239.jpeg",
+   "note": "Portrait of a chestnut horse. Oil study.",
+   "w": 482,
+   "h": 640
+  },
+  {
+   "code": "O-23",
+   "title": "The Old Homestead",
+   "cat": "oil",
+   "file": "oil_paintings/IMG_0233.jpeg",
+   "note": "A weathered barn in the dry grass. Oil study.",
+   "w": 640,
+   "h": 476
   },
   {
    "code": "W-01",

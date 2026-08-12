@@ -5,6 +5,12 @@
 // (e.g. "gailwager") to collect real visit + region + artwork analytics.
 const GOATCOUNTER_CODE = "";
 
+/* ---------- Image URLs ---------- */
+// Encode an image path that may contain subdirectories (e.g. oil_paintings/…)
+function encodePath(p) {
+  return p.split("/").map(encodeURIComponent).join("/");
+}
+
 /* ---------- Favorites (stars) ---------- */
 const FAV_KEY = "gw_favorites";
 
@@ -77,11 +83,12 @@ function injectGoatCounter() {
 function buildNav(activeKey) {
   const nav = document.createElement("nav");
   nav.className = "nav";
-  const wcCats = CATALOG.categories.filter(c => c.key !== "collage");
+  const wcCats = CATALOG.categories.filter(c => c.key !== "collage" && c.key !== "oil");
   const wcActive = wcCats.some(c => c.key === activeKey);
   nav.innerHTML =
     `<a class="brand" href="index.html">Gail Wager</a>
      <a class="item ${activeKey === "collage" ? "active" : ""}" href="gallery.html?cat=collage">Mixed Media</a>
+     <a class="item ${activeKey === "oil" ? "active" : ""}" href="gallery.html?cat=oil">Oil Paintings</a>
      <div class="dropdown">
        <button class="item drop-btn ${wcActive ? "active" : ""}" type="button"
                aria-haspopup="true" aria-expanded="false">Watercolor Collections <span class="caret">&#9662;</span></button>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gail Wager — Colorado Artist</title>
-<meta name="description" content="Watercolors and mixed media by Gail Wager, an artist painting in the mountains of Colorado for over 50 years.">
+<meta name="description" content="Watercolors, oil paintings and mixed media by Gail Wager, an artist painting in the mountains of Colorado for over 50 years.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -17,7 +17,7 @@
   <div class="hero-veil"></div>
   <div class="hero-title" id="hero-title">
     <h1>Gail Wager</h1>
-    <p>Watercolors &amp; mixed media from the Colorado mountains</p>
+    <p>Watercolors, oils &amp; mixed media from the Colorado mountains</p>
   </div>
   <div class="scroll-hint">&#8595;</div>
 </header>
@@ -37,6 +37,7 @@
 /* representative image per category tile */
 const TILE_ART = {
   "collage": "mm_DThRBt_DWTd.jpg",
+  "oil": "oil_paintings/IMG_0236.jpeg",
   "wildlife": "FOX2001.JPG",
   "birds": "wood ducks new camera.jpg",
   "horses": "winter stampede.jpg",
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const img = TILE_ART[c.key] || CATALOG.artworks.find(a => a.cat === c.key).file;
     const thumb = img.replace(/\.[^.]+$/, ".jpg");
     return `<a class="tile" href="gallery.html?cat=${c.key}">
-      <img loading="lazy" src="images/thumbs/${encodeURIComponent(thumb)}" alt="${c.name}">
+      <img loading="lazy" src="images/thumbs/${encodePath(thumb)}" alt="${c.name}">
       <span class="count-chip">${n} works</span>
       <span class="tile-label"><h3>${c.name}</h3><span>${c.tag}</span></span>
     </a>`;
