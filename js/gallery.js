@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ${isFavorite(w.code) ? "&#9733;" : "&#9734;"}
       </button>
       <span class="code-chip">${w.code}</span>
-      <div class="imgbox"><img loading="lazy" src="images/thumbs/${encodeURIComponent(thumbName(w.file))}" alt="${w.title}"></div>
+      <div class="imgbox"><img loading="lazy" src="images/thumbs/${encodePath(thumbName(w.file))}" alt="${w.title}"></div>
       <figcaption class="meta"><div class="t">${w.title}</div></figcaption>
     </figure>`).join("");
 
@@ -78,7 +78,7 @@ function openLightbox(i) {
   lbIndex = i;
   const w = works[i];
   const lb = document.getElementById("lightbox");
-  lb.querySelector("img").src = "images/" + encodeURIComponent(w.file);
+  lb.querySelector("img").src = "images/" + encodePath(w.file);
   lb.querySelector("img").alt = w.title;
   lb.querySelector(".cap .t").textContent = w.title;
   lb.querySelector(".cap .c").textContent = w.code + " · " + cat.name.toUpperCase();

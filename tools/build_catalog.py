@@ -5,7 +5,8 @@ Usage: python3 tools/build_catalog.py   (from anywhere; paths are repo-relative)
 
 To ADD artwork: drop the image in images/, add an entry to ART below (or, for
 Instagram mixed-media pieces named mm_<postcode>.jpg, add the title to
-MM_TITLES and the caption to data/ig-captions.json), then rerun. NOTE: codes
+MM_TITLES and the caption to data/ig-captions.json; for oil paintings, drop
+the image in images/oil_paintings/ and add an entry to OIL), then rerun. NOTE: codes
 (e.g. W-07) are assigned alphabetically by title within each category, so
 adding a work renumbers later codes in that category — visitors' saved stars
 reference codes, so batch additions rather than trickling them in.
@@ -20,6 +21,7 @@ os.makedirs(OUT, exist_ok=True)
 
 # category key -> (code letter, display name, tagline)
 CATS = {
+    "oil":       ("O", "Oil Paintings", "New work in oils — bears, barns and Colorado light"),
     "wildlife":  ("W", "Wildlife", "Elk, bears, foxes and the wild neighbors of the Rockies"),
     "birds":     ("B", "Birds", "From loons on quiet water to meadowlarks in song"),
     "dogs-cats": ("D", "Dogs & Cats", "Beloved companions, painted with personality"),
@@ -184,6 +186,37 @@ ART = {
  "St. Francis of Assisi.JPG": ("southwest", "St. Francis of Assisi", "Mission bell towers against a stormy sky."),
 }
 
+# Oil Paintings — images live in images/oil_paintings/.
+# filename -> (title, note); titles/sizes from Gail's list, untitled studies
+# are given descriptive names.
+OIL = {
+ "IMG_0209.jpeg": ("Early Morning Frolic", "Two paint horses at play in the morning light. Oil, 24″ × 20″."),
+ "IMG_0212.jpeg": ("Snowmelt in Spring", "A creek finding its way through the last of the snow. Oil, 14″ × 11″."),
+ "IMG_0213.jpeg": ("Mama Bear", "Black bear portrait. Oil, 25″ × 25″."),
+ "IMG_0214.jpeg": ("Five Island Lobster", "The lobster shack at Five Islands, Maine. Oil, 16″ × 13″."),
+ "IMG_0215.jpeg": ("Niko", "Bernese mountain dog puppy portrait. Oil, 11″ × 14″."),
+ "IMG_0216.jpeg": ("Peaceful Afternoon in Evergreen", "A red barn in the green hills. Oil, 15″ × 12″."),
+ "IMG_0217.jpeg": ("Bluebird", "A bluebird perched on barbed wire. Oil, 12″ × 15″."),
+ "IMG_0218.jpeg": ("Black Lab", "Black lab portrait. Oil, 12″ × 15″."),
+ "IMG_0219.jpeg": ("Sunrise on Snowbird Lane", "Winter sunrise over the valley. Oil, 17″ × 14″."),
+ "IMG_0220.jpeg": ("Old Mine in Nevadaville", "The old mine buildings at Nevadaville, Colorado. Oil, 17″ × 14″."),
+ "IMG_0221.jpeg": ("Evergreen Lake", "Quiet water and willows at Evergreen Lake, Colorado. Oil, 17″ × 15″."),
+ "IMG_0222.jpeg": ("Mr. Fox", "Red fox portrait. Oil, 17″ × 15″."),
+ "IMG_0223.jpeg": ("Autumn on Squaw Pass", "Golden aspens against the September sky. Oil, 17″ × 15″."),
+ "IMG_0224.jpeg": ("Beautiful Day on the Colorado Plains", "A weathered grain elevator under big clouds. Oil, 12″ × 15″."),
+ "IMG_0225.jpeg": ("Buffalo", "A bull bison in winter grass. Oil, 17″ × 15″."),
+ "IMG_0230.jpeg": ("Red Barn in the Foothills", "Horses at the fence below the mountains. Oil study."),
+ "IMG_0231.jpeg": ("The CP Barn", "An old barn wearing its painted brand. Oil study."),
+ "IMG_0233.jpeg": ("The Old Homestead", "A weathered barn in the dry grass. Oil study."),
+ "IMG_0235.jpeg": ("High Country Barn", "A red barn at the edge of the pines, aspens alongside. Oil study."),
+ "IMG_0236.jpeg": ("Late Winter Barn", "Snow lingering on the roof, bare aspens behind. Oil study."),
+ "IMG_0237.jpeg": ("Cabin 1000", "Old cabins in the dry hills. Oil study."),
+ "IMG_0238.jpeg": ("Early Spring", "A bare tree beside the path, waiting for the season to turn. Oil study."),
+ "IMG_0239.jpeg": ("The Chestnut", "Portrait of a chestnut horse. Oil study."),
+}
+for _f, (_t, _n) in OIL.items():
+    ART["oil_paintings/" + _f] = ("oil", _t, _n)
+
 # Mixed Media & Collage — titles from Gail's own Instagram captions;
 # untitled pieces are given descriptive names.
 MM_TITLES = {
@@ -251,6 +284,10 @@ for _f in os.listdir(REPO):
         ART[_f] = ("collage", _title, _clean_caption(_caps.get(_code, "")))
 
 files = sorted(f for f in os.listdir(REPO) if os.path.isfile(os.path.join(REPO, f)) and not f.startswith("."))
+_oildir = os.path.join(REPO, "oil_paintings")
+if os.path.isdir(_oildir):
+    files += sorted("oil_paintings/" + f for f in os.listdir(_oildir)
+                    if f.lower().endswith((".jpg", ".jpeg", ".png")) and not f.startswith("."))
 unknown = [f for f in files if f not in ART]
 missing = [f for f in ART if f not in files]
 if unknown:
@@ -259,7 +296,7 @@ if missing:
     print("MISSING:", missing)
 
 # assign codes: sort by title within category
-order = ["collage", "wildlife", "birds", "horses", "dogs-cats", "people", "flowers", "landscapes", "southwest"]
+order = ["collage", "oil", "wildlife", "birds", "horses", "dogs-cats", "people", "flowers", "landscapes", "southwest"]
 items = []
 for cat in order:
     letter = CATS[cat][0]
@@ -282,6 +319,7 @@ made = 0
 for it in items:
     tpath = os.path.join(THUMBS, os.path.splitext(it["file"])[0] + ".jpg")
     if not os.path.exists(tpath):
+        os.makedirs(os.path.dirname(tpath), exist_ok=True)
         im = Image.open(os.path.join(REPO, it["file"])).convert("RGB")
         im.thumbnail((600, 600))
         im.save(tpath, quality=82, optimize=True)

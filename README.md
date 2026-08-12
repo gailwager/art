@@ -1,7 +1,8 @@
 # Gail Wager — Colorado Artist
 
 Portfolio website for Gail Wager, an artist who has been painting in the mountains of
-Colorado for over 50 years. Watercolors, portraits, and recent mixed media collage.
+Colorado for over 50 years. Watercolors, portraits, oil paintings, and recent
+mixed media collage.
 
 **Live site: <https://gailwager.github.io/art/>**
 
@@ -12,9 +13,9 @@ Colorado for over 50 years. Watercolors, portraits, and recent mixed media colla
 ## Sections
 
 - **Home** — parallax banner and interactive tiles for each collection
-- **Galleries** — nine collections (Wildlife, Birds, Horses & Farm, Dogs & Cats,
+- **Galleries** — ten collections (Wildlife, Birds, Horses & Farm, Dogs & Cats,
   People & Portraits, Flowers & Still Life, Landscapes & Towns, Southwest,
-  Mixed Media & Collage), 227 works in all
+  Mixed Media & Collage, Oil Paintings), 250 works in all
 - **About the Artist** — bio with Instagram / Facebook links
 - **Purchase Inquiries** — originals $400–$1,500, with a contact form
 - **[Analytics report](https://gailwager.github.io/art/analytics.html)** — visits and
