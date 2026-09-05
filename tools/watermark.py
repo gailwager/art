@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Apply a tiled diagonal "© Gail Wager" watermark to the site's full-size images.
 
-Watermarks images in images/ and images/oil_paintings/ in place.
-Skips images/thumbs/ (low-res) and images/reference/ (not shown on the site).
+Watermarks images in images/, images/oil_paintings/, images/thumbs/ and
+images/thumbs/oil_paintings/ in place. Skips images/reference/ (not shown on
+the site) and the home-page hero image, which stays clean by request.
 
 Clean originals live in the private repo (art-originals); to re-run from
 scratch, restore images/ from there first, then run this script.
@@ -19,7 +20,14 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-IMAGE_DIRS = [REPO_ROOT / "images", REPO_ROOT / "images" / "oil_paintings"]
+IMAGE_DIRS = [
+    REPO_ROOT / "images",
+    REPO_ROOT / "images" / "oil_paintings",
+    REPO_ROOT / "images" / "thumbs",
+    REPO_ROOT / "images" / "thumbs" / "oil_paintings",
+]
+# The home-page hero image stays un-watermarked
+EXCLUDE = {REPO_ROOT / "images" / "autumn in evergreen (3).jpg"}
 EXTENSIONS = {".jpg", ".jpeg", ".png"}
 FONT_PATH = "/System/Library/Fonts/Helvetica.ttc"
 
@@ -91,6 +99,7 @@ def main():
         targets = sorted(
             p for d in IMAGE_DIRS for p in d.iterdir()
             if p.is_file() and p.suffix.lower() in EXTENSIONS
+            and p not in EXCLUDE
         )
 
     failed = []
